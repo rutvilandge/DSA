@@ -1,0 +1,20 @@
+// LC 217 - Contains Duplicate
+// Pattern: Hash Set
+// Time: O(n) average
+// Space: O(n)
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_set<int> s;
+
+        for (int x : nums) {
+            if (s.count(x))
+                return true;
+
+            s.insert(x);
+        }
+
+        return false;
+    }
+};
