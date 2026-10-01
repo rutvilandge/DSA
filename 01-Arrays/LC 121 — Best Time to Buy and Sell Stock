@@ -1,20 +1,16 @@
-##LC 121 - Best Time to Buy and Sell Stock
-##Pattern: Greedy
+LC 121 - Best Time to Buy and Sell Stock
+Pattern: Greedy
 // Time: O(n)
 // Space: O(1)
 
-
-
-
-## Algorithm:
+ALGO:
 minPrice = prices[0]
 Traverse from index 1
 Update minimum price.
 Calculate prices[i] - minPrice
 Update maximum profit.
 
-
-##Code:
+CODE:
 
 class Solution {
 public:
@@ -31,7 +27,7 @@ public:
     }
 };
 
-##EX:
+EX:
 [7, 1, 5, 3, 6, 4]
 
 min = 7
