@@ -1,0 +1,44 @@
+LC 169 — Majority Element
+
+Pattern: Boyer-Moore
+Time: O(n)
+Space: O(1)
+
+ALGO:
+count = 0
+Traverse array
+If count = 0 → candidate = current
+Same → count++
+Different → count--
+Return candidate
+
+CODE:
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int candidate = 0, count = 0;
+
+        for (int x : nums) {
+            if (count == 0)
+                candidate = x;
+
+            count += (x == candidate) ? 1 : -1;
+        }
+
+        return candidate;
+    }
+};
+
+EX:
+[2, 2, 1, 2, 3]
+
+candidate = 2
+count = 0
+
+2 → count=0 → candidate=2 → count=1
+2 → same as candidate → count=2
+1 → different → count=1
+2 → same → count=2
+3 → different → count=1
+
+Answer = 2 ✅
