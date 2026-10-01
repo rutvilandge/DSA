@@ -1,7 +1,16 @@
-// LC 136 - Single Number
+## // LC 136 - Single Number
 // Pattern: XOR / Bit Manipulation
 // Time: O(n)
 // Space: O(1)
+
+## ALGO:
+i = 0
+j = 0 → n-1
+if nums[j] != 0:
+    swap(nums[i], nums[j])
+    i++
+
+## CODE:
 
 class Solution {
 public:
@@ -14,3 +23,12 @@ public:
         return ans;
     }
 };
+
+##EX:
+[0,1,0,3,12]
+
+j=0 → 0 → skip
+j=1 → 1 → swap → [1,0,0,3,12]
+j=2 → 0 → skip
+j=3 → 3 → swap → [1,3,0,0,12]
+j=4 → 12 → swap → [1,3,12,0,0]
