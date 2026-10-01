@@ -1,0 +1,47 @@
+LC 560 — Subarray Sum Equals K
+Pattern: Prefix Sum + HashMap
+Time: O(n)
+Space: O(n)
+
+ALGO:
+sum = 0
+Store prefix sums in HashMap
+Check if sum - k exists
+Add its frequency to answer
+Store current sum
+
+CODE:
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int, int> mp;
+        mp[0] = 1;
+
+        int sum = 0, ans = 0;
+
+        for (int x : nums) {
+            sum += x;
+
+            if (mp.count(sum - k))
+                ans += mp[sum - k];
+
+            mp[sum]++;
+        }
+
+        return ans;
+    }
+};
+
+EX:
+[1,1,1], k = 2
+
+sum=1 → need=-1 → not found ❌
+
+sum=2 → need=0 → found ✅
+→ [1,1]
+
+sum=3 → need=1 → found ✅
+→ [1,1]
+
+
+
