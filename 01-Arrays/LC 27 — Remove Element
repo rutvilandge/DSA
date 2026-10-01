@@ -1,0 +1,41 @@
+// LC 27 - Remove Element
+// Pattern: Two Pointers
+// Time: O(n)
+// Space: O(1)
+
+ALGO:
+i = 0
+for every j:
+    if nums[j] != val:
+        nums[i] = nums[j]
+        i++
+return i
+
+CODE:
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        int i = 0;
+
+        for (int j = 0; j < nums.size(); j++) {
+            if (nums[j] != val) {
+                nums[i] = nums[j];
+                i++;
+            }
+        }
+
+        return i;
+    }
+};
+
+EX:
+nums = [3,2,2,3], val = 3
+
+j=0 → 3 → skip
+j=1 → 2 → put at i=0
+       [2,2,2,3]
+j=2 → 2 → put at i=1
+       [2,2,2,3]
+j=3 → 3 → skip
+
+k = 2
