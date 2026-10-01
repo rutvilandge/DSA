@@ -1,0 +1,46 @@
+// LC 1 - Two Sum
+// Pattern: HashMap
+// Time: O(n)
+// Space: O(n)
+
+ALGO:
+Create HashMap
+For every number:
+    complement = target - number
+    if complement exists:
+        return its index + current index
+    store number and index
+
+CODE:
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> mp;
+
+        for (int i = 0; i < nums.size(); i++) {
+            int need = target - nums[i];
+
+            if (mp.count(need))
+                return {mp[need], i};
+
+            mp[nums[i]] = i;
+        }
+
+        return {};
+    }
+};
+
+EX:
+nums = [2,7,11,15]
+target = 9
+
+i=0 → 2
+need = 9-2 = 7
+7 not found
+store 2 → 0
+
+i=1 → 7
+need = 9-7 = 2
+2 found ✅
+
+Answer = [0,1]
