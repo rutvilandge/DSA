@@ -1,0 +1,28 @@
+LC 28 — Find Index of First Occurrence
+Pattern:String Traversal
+
+Logic:
+Check where needle starts inside haystack.
+C++ find() gives the starting index.
+If not found → -1.
+
+Algorithm:
+Find needle inside haystack
+If found → return index
+Otherwise → return -1
+
+CODE:
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        return haystack.find(needle);
+    }
+};
+
+EX:
+haystack = "sadbutsad"
+needle = "sad"
+
+"sad" starts at index 0
+
+Answer = 0 ✅
