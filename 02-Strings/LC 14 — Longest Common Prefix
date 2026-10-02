@@ -1,0 +1,47 @@
+LC 14 — Longest Common Prefix
+Pattern:String Traversal
+
+Logic:
+Take the first string as prefix.
+Compare it with every other string.
+Keep reducing prefix until it matches.
+
+Algorithm:
+prefix = first string
+
+For every other string:
+    while string doesn't start with prefix:
+        remove last character from prefix
+
+return prefix
+
+CODE:
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        string prefix = strs[0];
+
+        for (int i = 1; i < strs.size(); i++) {
+            while (strs[i].find(prefix) != 0)
+                prefix.pop_back();
+
+            if (prefix.empty())
+                return "";
+        }
+
+        return prefix;
+    }
+};
+
+EX:
+s = ["flower","flow","flight"]
+
+prefix = "flower"
+
+Compare with "flow"
+→ reduce → "flow"
+
+Compare with "flight"
+→ reduce → "fl"
+
+Answer = "fl" ✅
