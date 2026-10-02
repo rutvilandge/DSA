@@ -1,0 +1,54 @@
+LC 424 — Longest Repeating Character Replacement
+Pattern:Sliding Window + Hashing
+
+Logic:
+Keep a window.
+Find the most frequent character in the window.
+Change the other characters to it.
+If changes needed > k, shrink the window.
+Keep maximum window length.
+
+Algorithm:
+maxFreq = most frequent character
+
+window length - maxFreq = replacements needed
+
+If replacements > k:
+    move left pointer
+
+Keep maximum length
+
+CODE:
+lass Solution {
+public:
+    int characterReplacement(string s, int k) {
+        int count[26] = {};
+        int i = 0, maxFreq = 0, ans = 0;
+
+        for (int j = 0; j < s.size(); j++) {
+            count[s[j] - 'A']++;
+            maxFreq = max(maxFreq, count[s[j] - 'A']);
+
+            while (j - i + 1 - maxFreq > k) {
+                count[s[i] - 'A']--;
+                i++;
+            }
+
+            ans = max(ans, j - i + 1);
+        }
+
+        return ans;
+    }
+};
+
+s = "AABABBA"
+k = 1
+
+"AABA"
+A = 3
+B = 1
+
+Need 1 replacement → "AAAA" ✅
+Length = 4
+
+Answer = 4 ✅
