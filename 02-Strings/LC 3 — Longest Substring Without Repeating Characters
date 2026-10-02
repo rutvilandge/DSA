@@ -1,0 +1,57 @@
+LC 3 — Longest Substring Without Repeating Characters
+Pattern:Sliding Window + Hashing
+
+Logic:
+Keep a window with no duplicate characters.
+j expands the window.
+If duplicate appears, move i forward.
+Keep the maximum length.
+
+Algorithm:
+i = 0
+j = 0
+
+While j < string length:
+    if s[j] already exists:
+        move i forward
+    add s[j]
+    update maximum length
+    j++
+
+CODE:
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_set<char> st;
+        int i = 0, ans = 0;
+
+        for (int j = 0; j < s.size(); j++) {
+            while (st.count(s[j])) {
+                st.erase(s[i]);
+                i++;
+            }
+
+            st.insert(s[j]);
+            ans = max(ans, j - i + 1);
+        }
+
+        return ans;
+    }
+};
+
+EX:
+s = "abcabcbb"
+
+"abc" → 3 unique ✅
+
+next 'a' → duplicate ❌
+remove old 'a'
+"bca" → 3 unique ✅
+
+next 'b' → duplicate ❌
+remove old 'b'
+"cab" → 3 unique ✅
+
+Answer = 3 ✅
+
+
