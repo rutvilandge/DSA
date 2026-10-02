@@ -1,0 +1,58 @@
+LC 647 — Palindromic Substrings
+Pattern:Expand Around Center
+
+Logic:
+Every character can be a palindrome center.
+Check odd and even length palindromes.
+Count each palindrome.
+
+Algorithm:
+For every index:
+    expand left/right
+    count matching characters
+
+CODE:
+class Solution {
+public:
+    int countSubstrings(string s) {
+        int ans = 0;
+
+        for (int i = 0; i < s.size(); i++) {
+            for (int l = i, r = i; l >= 0 && r < s.size() && s[l] == s[r]; l--, r++)
+                ans++;
+
+            for (int l = i, r = i + 1; l >= 0 && r < s.size() && s[l] == s[r]; l--, r++)
+                ans++;
+        }
+
+        return ans;
+    }
+};
+
+s = "aaa"
+
+"a" → palindrome
+"aa" → palindrome
+"aaa" → palindrome
+"a" → palindrome
+"aa" → palindrome
+"a" → palindrome
+
+3 single "a"
++ 2 "aa"
++ 1 "aaa"
+= 6
+
+Answer = 6 ✅
+
+
+
+
+
+
+
+
+
+
+
+
