@@ -1,0 +1,49 @@
+LC 5 — Longest Palindromic Substring
+Pattern:Expand Around Center
+
+Logic:
+Expand from every center and keep the longest palindrome.
+
+Algorithm:
+For each index:
+    check odd palindrome
+    check even palindrome
+    keep longest
+
+CODE:
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        string ans = "";
+
+        for (int i = 0; i < s.size(); i++) {
+            for (int l = i, r = i; l >= 0 && r < s.size() && s[l] == s[r]; l--, r++)
+                if (r - l + 1 > ans.size()) ans = s.substr(l, r - l + 1);
+
+            for (int l = i, r = i + 1; l >= 0 && r < s.size() && s[l] == s[r]; l--, r++)
+                if (r - l + 1 > ans.size()) ans = s.substr(l, r - l + 1);
+        }
+
+        return ans;
+    }
+};
+
+EX:
+s = "babad"
+
+"bab" → palindrome ✅
+"aba" → palindrome ✅
+
+Longest length = 3
+Answer = "bab" (or "aba") ✅
+
+
+
+
+
+
+
+
+
+
+
