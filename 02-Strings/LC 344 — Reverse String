@@ -1,0 +1,52 @@
+LC 344 — Reverse String
+Pattern:
+
+Two Pointers
+
+Logic:
+One pointer at the start
+One pointer at the end
+Swap them
+Move both toward the middle
+
+Algorithm:
+i = 0
+j = last index
+
+while i < j:
+    swap s[i], s[j]
+    i++
+    j--
+
+CODE:
+class Solution {
+public:
+    void reverseString(vector<char>& s) {
+        int i = 0, j = s.size() - 1;
+
+        while (i < j) {
+            swap(s[i], s[j]);
+            i++;
+            j--;
+        }
+    }
+};
+
+
+
+EX:
+s = ["h","e","l","l","o"]
+
+i = 0 → h
+j = 4 → o
+swap → ["o","e","l","l","h"]
+
+i = 1 → e
+j = 3 → l
+swap → ["o","l","l","e","h"]
+
+i = 2
+j = 2
+stop
+
+Answer = ["o","l","l","e","h"] ✅
