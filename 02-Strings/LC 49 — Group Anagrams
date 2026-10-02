@@ -1,0 +1,57 @@
+LC 49 — Group Anagrams
+Pattern:Hashing
+
+Logic:
+Anagrams have the same sorted characters.
+Sort each word.
+Use sorted word as the key.
+Words with same key go into the same group.
+
+Algorithm:
+Sort each word
+Use sorted word as key
+Put word into that group
+Return all groups
+
+CODE:
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map<string, vector<string>> mp;
+
+        for (string s : strs) {
+            string key = s;
+            sort(key.begin(), key.end());
+            mp[key].push_back(s);
+        }
+
+        vector<vector<string>> ans;
+
+        for (auto& [key, group] : mp)
+            ans.push_back(group);
+
+        return ans;
+    }
+};
+
+strs = ["eat","tea","tan","ate","nat","bat"]
+
+"eat" → "aet"
+"tea" → "aet"
+"tan" → "ant"
+"ate" → "aet"
+"nat" → "ant"
+"bat" → "abt"
+
+Groups:
+["eat","tea","ate"]
+["tan","nat"]
+["bat"]
+
+Answer = these groups ✅
+
+Complexity:
+
+Time: O(n × k log k)
+Space: O(n × k)
+
