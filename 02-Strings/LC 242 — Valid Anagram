@@ -1,0 +1,52 @@
+LC 242 — Valid Anagram
+Pattern:Hashing
+
+Logic:
+Count how many times each character appears in both strings.
+If all counts match → anagram.
+
+Algorithm:
+Count characters in s
+Subtract characters using t
+If all counts = 0 → true
+
+CODE:
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if (s.size() != t.size())
+            return false;
+
+        int count[26] = {};
+
+        for (char c : s)
+            count[c - 'a']++;
+
+        for (char c : t)
+            count[c - 'a']--;
+
+        for (int x : count)
+            if (x != 0)
+                return false;
+
+        return true;
+    }
+};
+
+EX:
+s = "anagram"
+t = "nagaram"
+
+a → 3 in both
+n → 1 in both
+g → 1 in both
+r → 1 in both
+m → 1 in both
+
+All counts match
+Answer = true ✅
+
+Complexity:
+
+Time: O(n)
+Space: O(1)
