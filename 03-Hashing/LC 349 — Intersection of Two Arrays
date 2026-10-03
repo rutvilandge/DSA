@@ -1,0 +1,51 @@
+LC 349 — Intersection of Two Arrays
+Pattern:Hashing
+
+Logic:
+Put elements of nums1 into a set.
+Check which elements of nums2 are present.
+Use another set so duplicates appear only once.
+
+Algorithm:
+Store nums1 in set
+Check nums2
+If found → add to answer
+
+CODE:
+class Solution {
+public:
+    vector<int> intersection(vector<int>& a, vector<int>& b) {
+        unordered_set<int> s(a.begin(), a.end()), ans;
+
+        for (int x : b)
+            if (s.count(x))
+                ans.insert(x);
+
+        return vector<int>(ans.begin(), ans.end());
+    }
+};
+
+EX:
+nums1 = [1,2,2,1]
+nums2 = [2,2]
+
+nums1 set = {1,2}
+
+2 found → add 2
+2 already added → ignore
+
+Answer = [2] ✅
+
+Complexity:
+
+Time: O(n + m)
+Space: O(n)
+
+
+
+
+
+
+
+
+
