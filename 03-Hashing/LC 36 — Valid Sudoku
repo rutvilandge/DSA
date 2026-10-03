@@ -1,0 +1,53 @@
+LC 36 — Valid Sudoku
+Pattern:Hashing
+
+Logic:
+Check that every row, column, and 3×3 box has no duplicate number.
+
+Algorithm:
+For each cell:
+    check row
+    check column
+    check 3×3 box
+
+If duplicate → false
+Otherwise → true
+
+CODE:
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& b) {
+        unordered_set<string> s;
+
+        for (int i = 0; i < 9; i++)
+            for (int j = 0; j < 9; j++) {
+                if (b[i][j] == '.') continue;
+
+                string r = "r" + to_string(i) + b[i][j];
+                string c = "c" + to_string(j) + b[i][j];
+                string box = "b" + to_string(i/3*3+j/3) + b[i][j];
+
+                if (!s.insert(r).second ||
+                    !s.insert(c).second ||
+                    !s.insert(box).second)
+                    return false;
+            }
+
+        return true;
+    }
+};
+
+EX:
+Row = [5,3,.,.,7,.,.,.,.]
+
+5 → first time ✅
+3 → first time ✅
+7 → first time ✅
+
+No duplicate → valid ✅
+
+Complexity:
+
+Time: O(1) — only 81 cells
+Space: O(1)
+
