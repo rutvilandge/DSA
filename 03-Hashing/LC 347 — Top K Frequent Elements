@@ -1,0 +1,41 @@
+LC 347 — Top K Frequent Elements
+Pattern:Hashing
+
+Logic:
+Count frequency.
+Put numbers into buckets by frequency.
+Take the highest frequencies.
+
+Algorithm:
+Count frequency
+Create buckets
+Start from highest frequency
+Take k elements
+
+CODE:
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        unordered_map<int,int> mp;
+        for (int x : nums) mp[x]++;
+
+        vector<vector<int>> b(nums.size() + 1);
+        for (auto [x,f] : mp) b[f].push_back(x);
+
+        vector<int> ans;
+        for (int f = nums.size(); f >= 1 && ans.size() < k; f--)
+            for (int x : b[f]) ans.push_back(x);
+
+        return ans;
+    }
+};
+
+EX:
+nums = [1,1,1,2,2,3]
+k = 2
+
+1 → 3 times
+2 → 2 times
+3 → 1 time
+
+Answer = [1,2] ✅
