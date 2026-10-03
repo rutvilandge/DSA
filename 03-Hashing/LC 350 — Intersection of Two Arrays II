@@ -1,0 +1,48 @@
+LC 350 — Intersection of Two Arrays II
+Pattern:Hashing — Frequency Map
+
+Logic:
+Count frequency of elements in nums1.
+Traverse nums2.
+If number exists → add it and decrease its count.
+
+Algorithm:
+Count nums1
+Check nums2
+If count > 0:
+    add number
+    decrease count
+
+CODE:
+class Solution {
+public:
+    vector<int> intersect(vector<int>& a, vector<int>& b) {
+        unordered_map<int,int> mp;
+        vector<int> ans;
+
+        for (int x : a) mp[x]++;
+
+        for (int x : b) {
+            if (mp[x] > 0) {
+                ans.push_back(x);
+                mp[x]--;
+            }
+        }
+
+        return ans;
+    }
+};
+
+EX:
+nums1 = [1,2,2,1]
+nums2 = [2,2]
+
+2 → count = 2 → add
+2 → count = 1 → add
+
+Answer = [2,2] ✅
+
+Complexity:
+
+Time: O(n + m)
+Space: O(n)
