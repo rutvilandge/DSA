@@ -1,0 +1,60 @@
+LC 454 — 4Sum II
+Pattern:Hashing
+
+Logic:
+
+Store all possible sums of A + B.
+Then check whether -(C + D) exists.
+
+Algorithm:
+Store A[i] + B[j] frequencies
+For every C[i] + D[j]:
+    check -(C[i] + D[j])
+    add its frequency
+
+CODE:
+class Solution {
+public:
+    int fourSumCount(vector<int>& A, vector<int>& B,
+                     vector<int>& C, vector<int>& D) {
+        unordered_map<int,int> mp;
+        int ans = 0;
+
+        for (int a : A)
+            for (int b : B)
+                mp[a + b]++;
+
+        for (int c : C)
+            for (int d : D)
+                ans += mp[-(c + d)];
+
+        return ans;
+    }
+};
+
+EX:
+A = [1,2]
+B = [-2,-1]
+C = [-1,2]
+D = [0,2]
+
+We need:
+
+A + B + C + D = 0
+Combination 1:
+1 + (-2) + (-1) + 2
+= 0 ✅
+Combination 2:
+2 + (-1) + (-1) + 0
+= 0 ✅
+
+Therefore:
+
+2 valid combinations
+        ↓
+Answer = 2 ✅
+
+Complexity:
+
+Time: O(n²)
+Space: O(n²)
