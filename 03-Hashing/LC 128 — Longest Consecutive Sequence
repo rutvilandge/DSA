@@ -1,0 +1,55 @@
+LC 128 — Longest Consecutive Sequence
+Pattern:Hashing
+
+Logic:
+Put all numbers in a set.
+Start counting only when x - 1 is not present.
+Count consecutive numbers.
+
+Algorithm:
+Put all numbers in set
+
+For each number:
+    if x-1 doesn't exist:
+        count consecutive numbers
+        update maximum
+
+
+CODE:
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        unordered_set<int> s(nums.begin(), nums.end());
+        int ans = 0;
+
+        for (int x : s) {
+            if (!s.count(x - 1)) {
+                int y = x, len = 1;
+
+                while (s.count(y + 1))
+                    y++, len++;
+
+                ans = max(ans, len);
+            }
+        }
+
+        return ans;
+    }
+};
+
+EX:
+nums = [100,4,200,1,3,2]
+
+Set = {100,4,200,1,3,2}
+
+1 → no 0 → start
+1 → 2 → 3 → 4
+
+Length = 4
+
+Answer = 4 ✅
+
+Complexity:
+
+Time: O(n) average
+Space: O(n)
