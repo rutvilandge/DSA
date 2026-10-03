@@ -1,0 +1,78 @@
+LC 380 — Insert Delete GetRandom O(1)
+Pattern:Hashing + Array
+
+Logic:
+vector → stores values
+unordered_map → stores value → index
+This lets insert, delete, and random access work in O(1).
+
+Algorithm:
+Insert → add to vector + map
+Remove → swap with last + remove
+GetRandom → random vector element
+
+
+CODE:
+class RandomizedSet {
+    vector<int> v;
+    unordered_map<int,int> mp;
+
+public:
+    bool insert(int x) {
+        if (mp.count(x)) return false;
+        mp[x] = v.size();
+        v.push_back(x);
+        return true;
+    }
+
+    bool remove(int x) {
+        if (!mp.count(x)) return false;
+        int i = mp[x];
+        v[i] = v.back();
+        mp[v[i]] = i;
+        v.pop_back();
+        mp.erase(x);
+        return true;
+    }
+
+EX:
+We start with:
+
+[10, 20, 30]
+
+Want to remove 20.
+
+Instead of shifting everything, take the last element 30:
+
+[10, 20, 30]
+     ↓
+replace 20 with 30
+
+[10, 30, 30]
+
+Then remove the last element:
+
+[10, 30]
+
+Now:
+
+GetRandom()
+
+can return either:
+
+10 🎲
+or
+30 🎲
+
+👉 Why swap with last?
+Because removing the last element from a vector is O(1).
+
+    int getRandom() {
+        return v[rand() % v.size()];
+    }
+};
+Complexity:
+
+Insert: O(1) average
+Remove: O(1) average
+GetRandom: O(1)
