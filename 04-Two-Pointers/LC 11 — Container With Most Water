@@ -1,0 +1,38 @@
+LC 11 — Container With Most Water
+attern
+
+Two PointersLogic
+Start at both ends.
+Area = width × smaller height
+Move the pointer with the smaller height.
+
+Algorithm:
+Calculate area.
+Update maximum area.
+Move the shorter pointer.
+Return maximum area.
+
+CODE:
+class Solution {
+public:
+    int maxArea(vector<int>& h) {
+        int l = 0, r = h.size()-1, ans = 0;
+        while (l < r) {
+            ans = max(ans, min(h[l], h[r]) * (r-l));
+            if (h[l] < h[r]) l++;
+            else r--;
+        }
+        return ans;
+    }
+};
+
+EX:
+height = [1,8,6,2,5,4,8,3,7]
+
+l=0, r=8 → area = 8×1 = 8
+Move l
+
+l=1, r=8 → area = 7×7 = 49 ✅
+Move r
+
+Maximum area = 49
