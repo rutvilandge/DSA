@@ -1,0 +1,46 @@
+LC 881 — Boats to Save People
+Pattern:Two Pointers + Greedy
+
+Logic
+Sort people.
+l = lightest, r = heaviest.
+Put the heaviest person in a boat.
+If lightest can fit with them → pair them.
+Otherwise, heavy person goes alone.
+
+Algorithm
+Sort the array.
+Check people[l] + people[r].
+If <= limit → l++.
+Always r-- and boats++.
+
+CODE:
+class Solution {
+public:
+    int numRescueBoats(vector<int>& p, int limit) {
+        sort(p.begin(), p.end());
+        int l=0, r=p.size()-1, boats=0;
+        while (l<=r) {
+            if (p[l]+p[r] <= limit) l++;
+            r--;
+            boats++;
+        }
+        return boats;
+    }
+};
+EX:
+people = [3,2,2,1]
+limit = 3
+
+Sort:
+[1,2,2,3]
+
+1 + 3 = 4 ❌
+→ 3 goes alone
+
+1 + 2 = 3 ✅
+→ pair them
+
+2 → alone
+
+Boats = 3 ✅
