@@ -1,0 +1,45 @@
+LC 977 — Squares of a Sorted Array
+Pattern:Two Pointers
+
+Logic:
+
+Largest square comes from the largest absolute value.
+Compare abs(a[l]) and abs(a[r])
+Put the larger square at the end
+Move that pointer
+
+Algorithm:
+l = 0, r = n-1
+Compare a[l]² and a[r]²
+Put larger one at ans[k]
+Move pointer + k--
+
+CODE:
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& a) {
+        int l=0, r=a.size()-1, k=r;
+        vector<int> ans(a.size());
+        while (l<=r) {
+            if (abs(a[l]) > abs(a[r]))
+                ans[k--] = a[l]*a[l++];
+            else
+                ans[k--] = a[r]*a[r--];
+        }
+        return ans;
+    }
+};
+
+a = [-4,-1,0,3,10]
+
+Compare -4²=16 and 10²=100
+→ put 100 at end
+
+[-4,-1,0,3,100]
+
+Compare -4²=16 and 3²=9
+→ put 16
+
+[-4,-1,0,3,100]
+             ↑
+Final → [0,1,9,16,100] ✅
