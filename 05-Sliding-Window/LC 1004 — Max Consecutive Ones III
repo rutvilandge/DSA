@@ -1,0 +1,24 @@
+LC 1004 — Max Consecutive Ones III
+
+ALGO:
+Keep a window.
+Count the number of 0s.
+If zeros > k, remove from the left.
+Keep the maximum length.
+
+CODE:
+Keep a window.
+Count the number of 0s.
+If zeros > k, remove from the left.
+Keep the maximum length.
+
+EX:
+nums = [1,1,1,0,0,0,1,1,1,1,0]
+k = 2
+
+[1,1,1,0,0] → 2 zeros → length 5 ✅
+
+Add 0 → 3 zeros ❌
+Remove from left until zeros = 2
+
+Best window length = 6 🎯
