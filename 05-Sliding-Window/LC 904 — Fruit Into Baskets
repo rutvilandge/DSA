@@ -1,0 +1,44 @@
+LC 904 — Fruit Into Baskets
+
+Algorithm
+Keep a window with at most 2 different fruits.
+Add fruits from the right.
+If there are 3 types → remove from the left.
+Keep the maximum window length.
+
+
+CODE:
+class Solution {
+public:
+    int totalFruit(vector<int>& f) {
+        unordered_map<int,int> mp;
+        int l=0, ans=0;
+
+        for(int r=0;r<f.size();r++) {
+            mp[f[r]]++;
+
+            while(mp.size()>2) {
+                if(--mp[f[l]]==0) mp.erase(f[l]);
+                l++;
+            }
+
+            ans=max(ans,r-l+1);
+        }
+        return ans;
+    }
+};
+
+EX:
+fruits = [1,2,1,2,3]
+
+[1,2,1,2] → 2 types → length 4 ✅
+
+Add 3:
+[1,2,1,2,3] → 3 types ❌
+
+Remove from left until only 2 types:
+[2,1,2,3] → still 3 ❌
+[1,2,3] → still 3 ❌
+[2,3] → 2 types ✅
+
+Maximum = 4
