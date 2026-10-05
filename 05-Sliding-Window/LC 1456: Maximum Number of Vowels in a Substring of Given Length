@@ -1,0 +1,38 @@
+LC 1456: Maximum Number of Vowels in a Substring of Given Length
+
+Algorithm:
+Take a window of size k.
+Count vowels in it.
+Slide the window → remove left, add right.
+Keep maximum count.
+
+
+CODE:
+class Solution {
+public:
+    int maxVowels(string s, int k) {
+        int cnt = 0, ans = 0;
+
+        for (int i = 0; i < s.size(); i++) {
+            if (string("aeiou").find(s[i]) != string::npos)
+                cnt++;
+
+            if (i >= k && string("aeiou").find(s[i-k]) != string::npos)
+                cnt--;
+
+            if (i >= k-1)
+                ans = max(ans, cnt);
+        }
+
+        return ans;
+    }
+};
+
+
+EX:
+s = "abciiidef", k = 3
+
+"abc" → 1 vowel
+"bci" → 1
+"cii" → 2
+"iii" → 3 ✅
