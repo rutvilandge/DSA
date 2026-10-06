@@ -1,0 +1,42 @@
+LC 724 — Find Pivot Index
+Pattern:Prefix Sum
+
+Algorithm:
+Find total sum.
+Keep a left sum.
+right = total - left - nums[i].
+If left == right, that's the pivot.
+
+CODE:
+class Solution {
+public:
+    int pivotIndex(vector<int>& a) {
+        int total = 0, left = 0;
+        for (int x : a) total += x;
+
+        for (int i = 0; i < a.size(); i++) {
+            if (left == total - left - a[i])
+                return i;
+            left += a[i];
+        }
+        return -1;
+    }
+};
+
+EX:
+nums = [1,7,3,6,5,6]
+
+At i = 3:
+
+nums[i] = nums[3] = 6
+
+So:
+
+[1,7,3] | 6 | [5,6]
+  LEFT    ↑     RIGHT
+Left = 11
+Right = 11
+
+✅ Answer = 3
+
+nums[i] simply means the current element.
